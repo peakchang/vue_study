@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.10/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+        <div>
+            <div> {{word}} </div>
+            <form v-on:submit="onSubmitForm">
+                <input type="text" ref="answer" v-model="value">
+                <button type="submit" >입력!</button>
+            </form>
+            <div v-if="result"> 성공해써!!! </div>
+            <div v-else="result"> 실패해써!!! </div>
+        </div>
+    </div>
+
+    <script>
+        // Vue.component('word_relay')
+    </script>
+    <script>
+        const app = new Vue({
+            el: '#root',
+            data: {
+                word: '선풍기',
+                result: '',
+                value : ''
+            },
+            methods: {
+                onSubmitForm(e){
+                    e.preventDefault()
+                    const lastWord = this.word.charAt(this.word.length - 1);
+                    const firstWord = this.value.charAt(0);
+                    if(lastWord == firstWord){
+                        this.word = this.value
+                        this.value = ""
+                        this.result = true
+                        this.$refs.answer.focus()
+                    }else{
+                        this.result = false
+                        this.value = ""
+                        this.$refs.answer.focus()
+                    }
+                    console.log(this.value);
+                }
+                // 
+            }
+        })
+    </script>
+
+</body>
+</html>
